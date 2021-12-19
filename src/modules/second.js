@@ -1,9 +1,8 @@
 import getData from "./getData";
-import postData from "./postData";
 
 const second = () => {
   getData().then((data) => {
-    console.log(data);
+    console.log("data", data);
   });
 };
 
