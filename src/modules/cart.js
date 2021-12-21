@@ -35,7 +35,7 @@ function cart() {
     if (event.target.classList.contains("btn-primary")) {
       const card = event.target.closest(".card");
       const key = card.dataset.key;
-      console.log("key", key);
+
       const goods = JSON.parse(localStorage.getItem("goods"));
       let cart = localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
@@ -50,8 +50,12 @@ function cart() {
       });
 
       cart.push(goodItem);
-      console.log(cart);
+
       localStorage.setItem("cart", JSON.stringify(cart));
+      const goodsCounterObj = document.querySelector(".counter");
+      const goodsCounter = Number(goodsCounterObj.innerHTML);
+
+      goodsCounterObj.innerHTML = goodsCounter + 1;
     }
   });
 
@@ -75,6 +79,10 @@ function cart() {
       cartTotal.textContent = cart.reduce((sum, goodItem) => {
         return sum + goodItem.price;
       }, 0);
+
+      const goodsCounterObj = document.querySelector(".counter");
+      const goodsCounter = Number(goodsCounterObj.innerHTML);
+      goodsCounterObj.innerHTML = goodsCounter - 1;
     }
   });
 
@@ -88,6 +96,9 @@ function cart() {
 
       renderCart([]);
       cartTotal.textContent = 0;
+
+      const goodsCounterObj = document.querySelector(".counter");
+      goodsCounterObj.textContent = 0;
     });
   });
 }
